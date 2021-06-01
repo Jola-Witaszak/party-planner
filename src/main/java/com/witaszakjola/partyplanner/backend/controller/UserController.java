@@ -63,4 +63,11 @@ public class UserController {
 
         restTemplate.delete(url);
     }
+
+    public void updateUser(UserDto userDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users")
+                .build().encode().toUri();
+
+        restTemplate.put(url, userDto);
+    }
 }

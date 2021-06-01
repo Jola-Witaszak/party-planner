@@ -31,4 +31,8 @@ public class UserService {
         long userId = userDto.getId();
         userController.removeUser(userId);
     }
+
+    public void update(UserDto userDto) {
+        userController.updateUser(userDto);
+    }
 }

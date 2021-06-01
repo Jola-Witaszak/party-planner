@@ -1,4 +1,4 @@
-package com.witaszakjola.partyplanner.ui;
+package com.witaszakjola.partyplanner.ui.views.users;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -17,12 +17,10 @@ import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.data.validator.EmailValidator;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import com.witaszakjola.partyplanner.backend.domain.UserDto;
 import com.witaszakjola.partyplanner.backend.service.UserService;
 
-@Route("/guests")
 public class UserForm extends FormLayout {
 
     private final UserService userService;
@@ -35,8 +33,9 @@ public class UserForm extends FormLayout {
     TextField attending_party = new TextField("Attending Party?");
 
     Button saveButton = new Button("Save");
+    Button updateButton = new Button(("Update"));
     Button deleteButton = new Button("Delete");
-    Button cancelButton = new Button("Cancel");
+    Button closeButton = new Button("Close");
 
     Binder<UserDto> binder = new Binder<>(UserDto.class);
 
@@ -97,24 +96,42 @@ public class UserForm extends FormLayout {
         binder.forField(attending_party).withConverter(
                 new StringToBooleanConverter("It must be true or false")
         ).bind(UserDto::getAttending_party, UserDto::setAttending_party);
+
+        //null representation for textFields: id, username, email, phone, attending_party
+        binder.forField(id).withNullRepresentation("").withConverter(
+                new StringToLongConverter("Insert correct id")).bind(UserDto::getId, UserDto::setId);
+
+        binder.forField(username).withNullRepresentation("").bind(UserDto::getUsername, UserDto::setUsername);
+
+        binder.forField(email).withNullRepresentation("").bind(UserDto::getEmail, UserDto::setEmail);
+
+        binder.forField(phone).withNullRepresentation("").withConverter(
+                new StringToIntegerConverter("Not a number")).bind(UserDto::getPhone, UserDto::setPhone);
+
+        binder.forField(attending_party).withNullRepresentation("").withConverter(
+                new StringToBooleanConverter("It must be true or false"))
+                .bind(UserDto::getAttending_party, UserDto::setAttending_party);
     }
 
     private Component createButtonsLayout() {
         saveButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-        cancelButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        updateButton.addThemeVariants(ButtonVariant.LUMO_ICON);
+        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         deleteButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
 
         saveButton.addClickShortcut(Key.ENTER);
-        cancelButton.addClickShortcut(Key.ESCAPE);
+        updateButton.addClickShortcut(Key.BACKSPACE);
+        closeButton.addClickShortcut(Key.ESCAPE);
         deleteButton.addClickShortcut(Key.DELETE);
 
         saveButton.addClickListener(event -> validateAndSave());
+        updateButton.addClickListener(event -> validateAndSave());
         deleteButton.addClickListener(event -> fireEvent(new DeleteEvent(this, userDto)));
-        cancelButton.addClickListener(event -> fireEvent(new CloseEvent(this)));
+        closeButton.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
 
         binder.addStatusChangeListener(e -> saveButton.setEnabled(binder.isValid()));
-        return new HorizontalLayout(saveButton, deleteButton, cancelButton);
+        return new HorizontalLayout(saveButton, updateButton, deleteButton, closeButton);
     }
 
     private void validateAndSave() {
@@ -149,6 +166,10 @@ public class UserForm extends FormLayout {
         SaveEvent(UserForm source, UserDto userDto) {
             super(source, userDto);
         }
+    }
+
+    public static class UpdateEvent extends UserFormEvent {
+        UpdateEvent(UserForm source, UserDto userDto) {super(source, userDto);}
     }
 
     public static class DeleteEvent extends UserFormEvent {
