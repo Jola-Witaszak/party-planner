@@ -9,11 +9,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
-import com.witaszakjola.partyplanner.ui.views.events.EventsView;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
+import com.witaszakjola.partyplanner.ui.views.events.PartyView;
 import com.witaszakjola.partyplanner.ui.views.map.MapView;
 import com.witaszakjola.partyplanner.ui.views.users.ListView;
 
 @CssImport("./styles/shared-styles.css")
+@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainLayout extends AppLayout {
     public MainLayout() {
         createHeader();
@@ -36,7 +39,7 @@ public class MainLayout extends AppLayout {
         RouterLink listLink = new RouterLink("Users", ListView.class);
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-        RouterLink eventsLink = new RouterLink("Party", EventsView.class);
+        RouterLink eventsLink = new RouterLink("Party", PartyView.class);
         listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
         RouterLink mapLink = new RouterLink("Map & Weather Forecast", MapView.class);

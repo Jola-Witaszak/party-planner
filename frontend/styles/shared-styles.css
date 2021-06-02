@@ -20,7 +20,7 @@ a[highlight] {
 }
 
 .list-view .users-grid {
-    flex: 2;
+    flex: 4;
 }
 
 .list-view .user-form {
@@ -30,7 +30,28 @@ a[highlight] {
 
 @media all and (max-width: 1100px) {
     .list-view.editing .toolbar,
-    .list-view.editing .contact-grid {
+    .list-view.editing .users-grid {
+        display: none;
+    }
+}
+
+/* Party view */
+.party-view .content {
+    display: flex;
+}
+
+.party-view .party-grid {
+    flex: 4;
+}
+
+.party-view .party-form {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+@media all and (max-width: 1100px) {
+    .party-view.editing .toolbar,
+    .party-view.editing .party-grid {
         display: none;
     }
 }

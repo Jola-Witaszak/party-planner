@@ -50,6 +50,7 @@ public class ListView extends VerticalLayout {
         userService.save(event.getUserDto());
         updateList();
         closeEditor();
+        form.id.setVisible(true);
     }
 
     private void updateUserDto(UserForm.UpdateEvent event) {
@@ -100,8 +101,11 @@ public class ListView extends VerticalLayout {
         filterText.addValueChangeListener(e -> updateFilteredList());
 
         Button addNewUserButton = new Button("Add new user");
-        addNewUserButton.setVisible(false);
-        addNewUserButton.addClickListener(click -> addNewUser());
+        addNewUserButton.setVisible(true);
+        addNewUserButton.addClickListener(click -> {
+            form.id.setVisible(false);
+            addNewUser();
+        });
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addNewUserButton);
         toolbar.addClassName("toolbar");

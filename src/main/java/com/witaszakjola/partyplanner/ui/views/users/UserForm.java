@@ -73,49 +73,41 @@ public class UserForm extends FormLayout {
 
     private void initBinder() {
         // userId
-        binder.forField(id).withConverter(
-                new StringToLongConverter("Insert correct id")
-        ).bind(UserDto::getId, UserDto::setId);
+        binder.forField(id)
+                .withNullRepresentation("")
+                .withConverter(new StringToLongConverter("Insert correct id"))
+                .bind(UserDto::getId, UserDto::setId);
 
         // name
-        binder.forField(username).withValidator(firstName -> firstName.length() > 1,
-                "The name must contains at least 2 characters").asRequired()
+        binder.forField(username)
+                .asRequired("Is required")
+                .withNullRepresentation("")
+                .withValidator(name -> name.length() > 1, "The name must contains at least 2 characters")
                 .bind(UserDto::getUsername, UserDto::setUsername);
 
         // email
-        binder.forField(email).withValidator(
-                new EmailValidator("This doesn't look like a valid email address")
-        ).bind(UserDto::getEmail, UserDto::setEmail);
+        binder.forField(email)
+                .withNullRepresentation("")
+                .withValidator(
+                new EmailValidator("This doesn't look like a valid email address"))
+                .bind(UserDto::getEmail, UserDto::setEmail);
 
         // phone
-        binder.forField(phone).withConverter(
-                new StringToIntegerConverter("Not a number")
-        ).bind(UserDto::getPhone, UserDto::setPhone);
+        binder.forField(phone)
+                .withNullRepresentation("")
+                .withConverter(new StringToIntegerConverter("Not a number"))
+                .bind(UserDto::getPhone, UserDto::setPhone);
 
         // attending_party
-        binder.forField(attending_party).withConverter(
-                new StringToBooleanConverter("It must be true or false")
-        ).bind(UserDto::getAttending_party, UserDto::setAttending_party);
-
-        //null representation for textFields: id, username, email, phone, attending_party
-        binder.forField(id).withNullRepresentation("").withConverter(
-                new StringToLongConverter("Insert correct id")).bind(UserDto::getId, UserDto::setId);
-
-        binder.forField(username).withNullRepresentation("").bind(UserDto::getUsername, UserDto::setUsername);
-
-        binder.forField(email).withNullRepresentation("").bind(UserDto::getEmail, UserDto::setEmail);
-
-        binder.forField(phone).withNullRepresentation("").withConverter(
-                new StringToIntegerConverter("Not a number")).bind(UserDto::getPhone, UserDto::setPhone);
-
-        binder.forField(attending_party).withNullRepresentation("").withConverter(
-                new StringToBooleanConverter("It must be true or false"))
+        binder.forField(attending_party)
+                .withNullRepresentation("")
+                .withConverter(new StringToBooleanConverter("It must be true or false"))
                 .bind(UserDto::getAttending_party, UserDto::setAttending_party);
     }
 
     private Component createButtonsLayout() {
         saveButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-        updateButton.addThemeVariants(ButtonVariant.LUMO_ICON);
+        updateButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         deleteButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
 
@@ -125,13 +117,22 @@ public class UserForm extends FormLayout {
         deleteButton.addClickShortcut(Key.DELETE);
 
         saveButton.addClickListener(event -> validateAndSave());
-        updateButton.addClickListener(event -> validateAndSave());
+        updateButton.addClickListener(event -> validateAndUpdate());
         deleteButton.addClickListener(event -> fireEvent(new DeleteEvent(this, userDto)));
         closeButton.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
 
         binder.addStatusChangeListener(e -> saveButton.setEnabled(binder.isValid()));
         return new HorizontalLayout(saveButton, updateButton, deleteButton, closeButton);
+    }
+
+    private void validateAndUpdate() {
+        try {
+            binder.writeBean(userDto);
+            fireEvent(new UpdateEvent(this, userDto));
+        } catch (ValidationException e) {
+            e.printStackTrace();
+        }
     }
 
     private void validateAndSave() {
