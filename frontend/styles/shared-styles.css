@@ -1,0 +1,57 @@
+/* Main layout */
+
+a[highlight] {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.header {
+    padding: 0 var(--lumo-space-m);
+}
+
+.header h1.logo {
+    font-size: 1em;
+    margin: var(--lumo-space-m);
+}
+
+/* List view */
+.list-view .content {
+    display: flex;
+}
+
+.list-view .users-grid {
+    flex: 4;
+}
+
+.list-view .user-form {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+@media all and (max-width: 1100px) {
+    .list-view.editing .toolbar,
+    .list-view.editing .users-grid {
+        display: none;
+    }
+}
+
+/* Party view */
+.party-view .content {
+    display: flex;
+}
+
+.party-view .party-grid {
+    flex: 4;
+}
+
+.party-view .party-form {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+@media all and (max-width: 1100px) {
+    .party-view.editing .toolbar,
+    .party-view.editing .party-grid {
+        display: none;
+    }
+}
