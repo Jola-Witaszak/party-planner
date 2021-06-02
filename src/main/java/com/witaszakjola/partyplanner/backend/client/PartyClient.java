@@ -67,7 +67,7 @@ public class PartyClient {
     }
 
     public List<EventDto> findAll(String filteredEvent) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/events/" + filteredEvent)
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/events/search/" + filteredEvent)
                 .build().encode().toUri();
         return getEventsDto(url);
     }

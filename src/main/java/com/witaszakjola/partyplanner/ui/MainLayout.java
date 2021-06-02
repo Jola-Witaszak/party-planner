@@ -13,6 +13,7 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.witaszakjola.partyplanner.ui.views.events.PartyView;
 import com.witaszakjola.partyplanner.ui.views.map.MapView;
+import com.witaszakjola.partyplanner.ui.views.planner.PlannerView;
 import com.witaszakjola.partyplanner.ui.views.users.ListView;
 
 @CssImport("./styles/shared-styles.css")
@@ -45,6 +46,9 @@ public class MainLayout extends AppLayout {
         RouterLink mapLink = new RouterLink("Map & Weather Forecast", MapView.class);
         mapLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(listLink, eventsLink, mapLink));
+        RouterLink plannerLink = new RouterLink("Planner", PlannerView.class);
+        mapLink.setHighlightCondition(HighlightConditions.sameLocation());
+
+        addToDrawer(new VerticalLayout(listLink, eventsLink, mapLink, plannerLink));
     }
 }

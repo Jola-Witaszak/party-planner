@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.Binder;
@@ -31,7 +32,7 @@ public class PartyForm extends FormLayout{
         DatePicker startDate = new DatePicker("Start date");
         TimePicker startTime = new TimePicker("Start time");
         DatePicker endDate = new DatePicker("End date");
-        TextField description = new TextField("Description");
+        TextArea description = new TextArea("Description");
 
 
         Button saveButton = new Button("Save");

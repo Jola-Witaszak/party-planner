@@ -47,6 +47,7 @@ public class UserForm extends FormLayout {
 
         id.setClearButtonVisible(true);
 
+        username.setAutofocus(true);
         username.setClearButtonVisible(true);
         username.setPlaceholder("first name & last name");
         username.setValueChangeMode(ValueChangeMode.EAGER);
