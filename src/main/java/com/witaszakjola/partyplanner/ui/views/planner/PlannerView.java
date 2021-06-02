@@ -12,6 +12,7 @@ public class PlannerView extends VerticalLayout {
     Label temporary = new Label("in progress...");
 
     public PlannerView() {
+        temporary.addClassName("temporary-label");
         temporary.setSizeFull();
         add(temporary);
     }
