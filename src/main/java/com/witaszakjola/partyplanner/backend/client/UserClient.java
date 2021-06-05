@@ -1,4 +1,4 @@
-package com.witaszakjola.partyplanner.backend.controller;
+package com.witaszakjola.partyplanner.backend.client;
 
 import com.witaszakjola.partyplanner.backend.domain.UserDto;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
-public class UserController {
+public class UserClient {
 
     @Autowired
     private RestTemplate restTemplate;

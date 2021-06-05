@@ -3,13 +3,16 @@ package com.witaszakjola.partyplanner.ui.views.users;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.witaszakjola.partyplanner.backend.domain.Mail;
 import com.witaszakjola.partyplanner.backend.domain.UserDto;
+import com.witaszakjola.partyplanner.backend.service.MailService;
 import com.witaszakjola.partyplanner.backend.service.UserService;
 import com.witaszakjola.partyplanner.ui.MainLayout;
 
@@ -18,13 +21,16 @@ import com.witaszakjola.partyplanner.ui.MainLayout;
 public class ListView extends VerticalLayout {
 
     private UserService userService;
+    private MailService mailService;
     private UserForm form;
+    private MailForm mailForm;
 
     Grid<UserDto> grid = new Grid<>(UserDto.class);
     TextField filterText = new TextField();
 
-    public ListView(UserService userService) {
+    public ListView(UserService userService, MailService mailService, Mail mail) {
         this.userService = userService;
+        this.mailService = mailService;
 
         addClassName("list-view");
         setSizeFull();
@@ -36,11 +42,15 @@ public class ListView extends VerticalLayout {
         form.addListener(UserForm.DeleteEvent.class, this::deleteUserDto);
         form.addListener(UserForm.CloseEvent.class, e -> closeEditor());
 
+        mailForm = new MailForm(mailService);
+        mailForm.addListener(MailForm.SendEvent.class, this::sendEmail);
+        setMail(mail);
+
         Div content = new Div(grid, form);
         content.setClassName("content");
         content.setSizeFull();
 
-        add(getToolBar(), content);
+        add(getToolBar(), content, mailForm);
 
         updateList();
         closeEditor();
@@ -80,10 +90,23 @@ public class ListView extends VerticalLayout {
         }
     }
 
+    private void setMail(Mail mail) {
+        mailForm.setMail(mail);
+    }
+
+    private void editEmail(UserDto userDto) {
+        mailForm.mailTo.setValue(userDto.getEmail());
+    }
+
     private void closeEditor() {
         form.setUserDto(null);
         form.setVisible(false);
         removeClassName("editing");
+    }
+
+    private Notification sendEmail(MailForm.SendEvent event) {
+        String response =  mailService.sendEmail(event.getMail());
+        return Notification.show(response);
     }
 
     private void updateList() {
@@ -118,6 +141,9 @@ public class ListView extends VerticalLayout {
         grid.setColumns("id", "username", "email", "phone", "attending_party");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(event -> editUserDto(event.getValue()));
+        grid.asSingleSelect().addValueChangeListener(event -> {
+            editUserDto(event.getValue());
+           // editEmail(event.getValue());
+        });
     }
 }

@@ -17,6 +17,7 @@ import '@vaadin/flow-frontend/comboBoxConnector-es6.js';
 import '@vaadin/flow-frontend/contextMenuConnector-es6.js';
 import '@vaadin/flow-frontend/datepickerConnector.js';
 import '@vaadin/flow-frontend/dndConnector-es6.js';
+import '@vaadin/flow-frontend/field-highlighter/theme/lumo/vaadin-field-highlighter.js';
 import '@vaadin/flow-frontend/flow-component-renderer.js';
 import '@vaadin/flow-frontend/gridConnector-es6.js';
 import '@vaadin/flow-frontend/ironListConnector-es6.js';

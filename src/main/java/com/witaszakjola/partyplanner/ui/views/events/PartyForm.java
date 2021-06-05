@@ -148,7 +148,7 @@ public class PartyForm extends FormLayout{
 
         // Events
         public static abstract class PartyFormEvent extends ComponentEvent<PartyForm> {
-            private EventDto eventDto;
+            private final EventDto eventDto;
 
             protected PartyFormEvent(PartyForm source, EventDto eventDto) {
                 super(source, false);

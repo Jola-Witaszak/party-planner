@@ -43,13 +43,4 @@ public class EventDto {
             = "Description must be between 3 and 255 characters")
     @JsonProperty(value = "description")
     private String description;
-/*
-    @JsonProperty(value = "")
-    private Set<GpsPositionDto> gpsPositions;
-
-    @JsonProperty(value = "")
-    private Set<UserDto> users;
-
- */
-
 }

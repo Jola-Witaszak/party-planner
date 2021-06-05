@@ -1,6 +1,6 @@
 package com.witaszakjola.partyplanner.backend.service;
 
-import com.witaszakjola.partyplanner.backend.controller.UserController;
+import com.witaszakjola.partyplanner.backend.client.UserClient;
 import com.witaszakjola.partyplanner.backend.domain.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +13,26 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private final UserController userController;
+    private final UserClient userClient;
 
     public List<UserDto> findAll() {
-        return userController.getUsers();
+        return userClient.getUsers();
     }
 
     public List<UserDto> findAll(String filteredUser) {
-        return userController.filterUsers(filteredUser);
+        return userClient.filterUsers(filteredUser);
     }
 
     public UserDto save(UserDto userDto) {
-        return userController.createUser(userDto);
+        return userClient.createUser(userDto);
     }
 
     public void removeUser(UserDto userDto) {
         long userId = userDto.getId();
-        userController.removeUser(userId);
+        userClient.removeUser(userId);
     }
 
     public void update(UserDto userDto) {
-        userController.updateUser(userDto);
+        userClient.updateUser(userDto);
     }
 }
