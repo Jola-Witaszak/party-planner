@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
@@ -120,7 +121,9 @@ public class PartyForm extends FormLayout{
 
 
             binder.addStatusChangeListener(e -> saveButton.setEnabled(binder.isValid()));
-            return new HorizontalLayout(saveButton, updateButton, deleteButton, closeButton);
+            HorizontalLayout crud =  new HorizontalLayout(saveButton, updateButton, deleteButton);
+            HorizontalLayout close =  new HorizontalLayout(closeButton);
+            return new VerticalLayout(crud, close);
         }
 
         private void validateAndUpdate() {

@@ -20,7 +20,7 @@ public class PartyClient {
     private final RestTemplate restTemplate;
 
     private URI getUri() {
-        return UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/events")
+        return UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/events")
                 .build().encode().toUri();
     }
 
@@ -38,7 +38,7 @@ public class PartyClient {
 
     public void remove(long id) {
 
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/events/" + id)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/events/" + id)
                 .build().encode().toUri();
 
         restTemplate.delete(url);
@@ -67,7 +67,7 @@ public class PartyClient {
     }
 
     public List<EventDto> findAll(String filteredEvent) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/events/search/" + filteredEvent)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/events/search/" + filteredEvent)
                 .build().encode().toUri();
         return getEventsDto(url);
     }

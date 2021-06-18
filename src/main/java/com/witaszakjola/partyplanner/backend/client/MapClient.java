@@ -14,7 +14,7 @@ public class MapClient {
     private final RestTemplate restTemplate;
 
     public String getMap() {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/map")
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/map")
                 .build().encode().toUri();
 
         return restTemplate.getForObject(url, String.class);
