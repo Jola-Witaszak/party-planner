@@ -20,10 +20,10 @@ import com.witaszakjola.partyplanner.ui.MainLayout;
 @PageTitle("Users | Party Fun & Spontan Planner")
 public class ListView extends VerticalLayout {
 
-    private UserService userService;
-    private MailService mailService;
-    private UserForm form;
-    private MailForm mailForm;
+    private final UserService userService;
+    private final MailService mailService;
+    private final UserForm form;
+    private final MailForm mailForm;
 
     Grid<UserDto> grid = new Grid<>(UserDto.class);
     TextField filterText = new TextField();
@@ -60,7 +60,6 @@ public class ListView extends VerticalLayout {
         userService.save(event.getUserDto());
         updateList();
         closeEditor();
-        form.id.setVisible(true);
     }
 
     private void updateUserDto(UserForm.UpdateEvent event) {
@@ -126,7 +125,6 @@ public class ListView extends VerticalLayout {
         Button addNewUserButton = new Button("Add new user");
         addNewUserButton.setVisible(true);
         addNewUserButton.addClickListener(click -> {
-            form.id.setVisible(false);
             addNewUser();
         });
 
@@ -143,7 +141,7 @@ public class ListView extends VerticalLayout {
 
         grid.asSingleSelect().addValueChangeListener(event -> {
             editUserDto(event.getValue());
-           // editEmail(event.getValue());
+            editEmail(event.getValue());
         });
     }
 }

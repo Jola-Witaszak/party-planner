@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class MailService {
+
     private final MailClient mailClient;
 
     public String sendEmail(Mail mail) {

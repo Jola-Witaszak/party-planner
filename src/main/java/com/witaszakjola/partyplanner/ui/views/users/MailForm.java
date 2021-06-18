@@ -3,6 +3,7 @@ package com.witaszakjola.partyplanner.ui.views.users;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -16,14 +17,14 @@ import com.witaszakjola.partyplanner.backend.service.MailService;
 
 public class MailForm extends FormLayout {
 
-    private MailService mailService;
+    private final MailService mailService;
     private Mail mail;
 
-    EmailField mailTo = new EmailField("Mail to...");
-    TextField subject = new TextField("Subject");
-    TextArea message = new TextArea("Message") ;
+    EmailField mailTo = new EmailField();
+    TextField subject = new TextField();
+    TextArea message = new TextArea() ;
 
-    Button sendButton = new Button("Send");
+    Button sendButton = new Button("Send e-mail");
 
     Binder<Mail> binder;
 
@@ -33,18 +34,22 @@ public class MailForm extends FormLayout {
         setClassName("email-form");
 
         mailTo.setClearButtonVisible(true);
+        mailTo.setPlaceholder("E-mail address to");
 
         subject.setClearButtonVisible(true);
         subject.setValueChangeMode(ValueChangeMode.EAGER);
+        subject.setPlaceholder("Subject of the e-mail");
 
         message.setClearButtonVisible(true);
         message.setValueChangeMode(ValueChangeMode.EAGER);
+        message.setPlaceholder("Write a message");
 
         binder = new Binder<>(Mail.class);
         binder.bindInstanceFields(this);
         binder.setBean(mail);
 
         sendButton.addClickListener(event -> validateAndSend());
+        sendButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
         add(
                 mailTo,

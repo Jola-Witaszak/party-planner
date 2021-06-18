@@ -20,7 +20,7 @@ public class UserClient {
     private RestTemplate restTemplate;
 
     public List<UserDto> getUsers() {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users")
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users")
                 .build().encode().toUri();
 
         return getUserDtos(url);
@@ -28,7 +28,7 @@ public class UserClient {
     }
 
     public List<UserDto> filterUsers(String filteredUser) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users/search/" + filteredUser)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/users/search/" + filteredUser)
                 .build().encode().toUri();
 
         return getUserDtos(url);
@@ -50,7 +50,7 @@ public class UserClient {
     }
 
     public UserDto createUser(UserDto userDto) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users")
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users")
                 .build().encode().toUri();
 
         return restTemplate.postForObject(url, userDto, UserDto.class);
@@ -58,14 +58,14 @@ public class UserClient {
 
 
     public void removeUser(long userId) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users/" + userId)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users/" + userId)
                 .build().encode().toUri();
 
         restTemplate.delete(url);
     }
 
     public void updateUser(UserDto userDto) {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users")
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users")
                 .build().encode().toUri();
 
         restTemplate.put(url, userDto);

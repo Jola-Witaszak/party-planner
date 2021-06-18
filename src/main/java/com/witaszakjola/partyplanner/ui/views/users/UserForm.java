@@ -14,7 +14,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.converter.StringToBooleanConverter;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
-import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.data.validator.EmailValidator;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.shared.Registration;
@@ -26,7 +25,7 @@ public class UserForm extends FormLayout {
     private final UserService userService;
     private UserDto userDto;
 
-    TextField id = new TextField("User id");
+  //  TextField id = new TextField("User id");
     TextField username = new TextField("Name");
     EmailField email = new EmailField("Email");
     TextField phone = new TextField("Phone");
@@ -45,11 +44,10 @@ public class UserForm extends FormLayout {
 
         addClassName("user-form");
 
-        id.setClearButtonVisible(true);
+       // id.setClearButtonVisible(true);
 
         username.setAutofocus(true);
         username.setClearButtonVisible(true);
-        username.setPlaceholder("first name & last name");
         username.setValueChangeMode(ValueChangeMode.EAGER);
 
         email.setClearButtonVisible(true);
@@ -64,7 +62,7 @@ public class UserForm extends FormLayout {
         initBinder();
 
         add(
-                id,
+             //   id,
                 username,
                 email,
                 phone,
@@ -74,10 +72,10 @@ public class UserForm extends FormLayout {
 
     private void initBinder() {
         // userId
-        binder.forField(id)
+ /*       binder.forField(id)
                 .withNullRepresentation("")
                 .withConverter(new StringToLongConverter("Insert correct id"))
-                .bind(UserDto::getId, UserDto::setId);
+                .bind(UserDto::getId, UserDto::setId);*/
 
         // name
         binder.forField(username)
