@@ -28,7 +28,7 @@ public class UserClient {
     }
 
     public List<UserDto> filterUsers(String filteredUser) {
-        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/users/search/" + filteredUser)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users/search/" + filteredUser)
                 .build().encode().toUri();
 
         return getUserDtos(url);
