@@ -12,7 +12,7 @@ import com.witaszakjola.partyplanner.ui.MainLayout;
 @Route(value = "map", layout = MainLayout.class)
 public class MapView extends VerticalLayout {
 
-    private MapService mapService;
+    private final MapService mapService;
 
     Label inProgress = new Label("in progress...");
 
@@ -33,6 +33,6 @@ public class MapView extends VerticalLayout {
     }
 
     private void download() {
-      //  return new Div(mapService.downloadMap());
+        mapService.downloadMap();
     }
 }
