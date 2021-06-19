@@ -1,9 +1,11 @@
 plugins {
     id 'org.springframework.boot' version '2.4.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.vaadin' version '0.14.3.7'
+    id 'com.vaadin' version '0.14.6.0'
     id 'java'
 }
+
+defaultTasks("clean", "build")
 
 group = 'com.witaszakjola'
 version = '0.0.1-SNAPSHOT'
