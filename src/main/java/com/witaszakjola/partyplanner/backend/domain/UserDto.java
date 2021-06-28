@@ -16,17 +16,16 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
-    @NotNull(message = "id must be a number")
     @JsonProperty(value = "userId")
     private Long id;
 
-    @NotNull(message = "Name cannot be null")
+    @NotNull
     @JsonProperty(value = "username")
     private String username;
 
-    @Email(message = "Email should be valid")
+    @Email
     @NotEmpty
-    @NotNull(message = "email cannot be null")
+    @NotNull
     @JsonProperty(value = "email")
     private String email;
 

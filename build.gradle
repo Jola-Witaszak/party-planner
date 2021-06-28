@@ -1,36 +1,31 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.0'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.vaadin' version '0.14.6.0'
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'com.vaadin' version '0.14.5.1'
 }
 
-defaultTasks("clean", "build")
+defaultTasks("clean", "build", "prepare")
 
 group = 'com.witaszakjola'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
-    maven { url "https://maven.vaadin.com/vaadin-addons" }
 }
 
 ext {
-    set('vaadinVersion', "14.6.1")
+    set('vaadinVersion', "14.5.1")
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
     }
 }
+
 
 dependencies {
     implementation('com.vaadin:vaadin-spring-boot-starter')
@@ -41,6 +36,16 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:$vaadinVersion"
+    }
+}
+
 test {
     useJUnitPlatform()
+}
+
+vaadin {
+    pnpmEnable = false
 }
