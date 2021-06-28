@@ -50,7 +50,6 @@ public class PartyView extends VerticalLayout {
             partyService.save(event.getEventDto());
             updateList();
             closeEditor();
-            form.id.setVisible(true);
         }
 
         private void updatePartyDto(PartyForm.UpdateEvent event) {
@@ -103,7 +102,6 @@ public class PartyView extends VerticalLayout {
             Button addNewPartyButton = new Button("Create new Party!");
             addNewPartyButton.setVisible(true);
             addNewPartyButton.addClickListener(click -> {
-                form.id.setVisible(false);
                 addNewParty();
             });
 

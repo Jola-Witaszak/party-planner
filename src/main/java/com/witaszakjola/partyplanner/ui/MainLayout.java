@@ -14,7 +14,7 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.witaszakjola.partyplanner.ui.views.events.PartyView;
-import com.witaszakjola.partyplanner.ui.views.home.LinkView;
+import com.witaszakjola.partyplanner.ui.views.links.LinkView;
 import com.witaszakjola.partyplanner.ui.views.map.MapView;
 import com.witaszakjola.partyplanner.ui.views.planner.PlannerView;
 import com.witaszakjola.partyplanner.ui.views.users.ListView;
@@ -35,7 +35,7 @@ public class MainLayout extends AppLayout {
         Avatar appAvatar = new Avatar("Party");
         StreamResource imageResource = new StreamResource(
                 "very-happy",
-                () -> getClass().getResourceAsStream("/static/very-happy.png"));
+                () -> getClass().getResourceAsStream("/META-INF/resources/img/very-happy.png"));
         appAvatar.setImageResource(imageResource);
 
         HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, appAvatar);

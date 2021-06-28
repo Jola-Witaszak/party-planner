@@ -1,6 +1,5 @@
 package com.witaszakjola.partyplanner.ui.views.map;
 
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -21,11 +20,6 @@ public class MapView extends VerticalLayout {
         this.mapService = mapService;
         addClassName("map-view");
         setSizeFull();
-        Div div = new Div();
-        div.setSizeFull();
-        div.addClassName("map");
-
-        download();
 
         inProgress.setSizeFull();
         inProgress.setVisible(true);

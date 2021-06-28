@@ -1,4 +1,4 @@
-package com.witaszakjola.partyplanner.ui.views.home;
+package com.witaszakjola.partyplanner.ui.views.links;
 
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
