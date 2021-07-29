@@ -8,7 +8,7 @@
       "@webcomponents/webcomponentsjs": "^2.2.10",
       "lit-html": "1.4.1",
       "@vaadin/vaadin-icons": "4.3.2",
-      "@vaadin/vaadin-grid": "5.7.13",
+      "@vaadin/vaadin-grid": "5.8.0",
       "@vaadin/vaadin-split-layout": "4.3.0",
       "@vaadin/vaadin-combo-box": "5.4.7",
       "@vaadin/vaadin-core-shrinkwrap": "14.6.1",
