@@ -20,6 +20,7 @@ public class UserClient {
     private RestTemplate restTemplate;
 
     public List<UserDto> getUsers() {
+        //URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8083/v1/users")
         URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users")
                 .build().encode().toUri();
 
@@ -28,7 +29,7 @@ public class UserClient {
     }
 
     public List<UserDto> filterUsers(String filteredUser) {
-        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/users/search/" + filteredUser)
+        URI url = UriComponentsBuilder.fromHttpUrl("https://glacial-taiga-47785.herokuapp.com/v1/users/search/" + filteredUser)
                 .build().encode().toUri();
 
         return getUserDtos(url);

@@ -1,45 +1,52 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.vaadin' version '0.14.3.7'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'com.vaadin' version '20.0.6'
 }
+
+defaultTasks("clean", "build", "prepare")
 
 group = 'com.witaszakjola'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
 repositories {
     mavenCentral()
 }
 
 ext {
-    set('vaadinVersion', "14.6.1")
+    set('vaadinVersion', "20.0.6")
 }
 
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('com.vaadin:vaadin-spring-boot-starter')
-    implementation group: 'com.vaadin', name:'collaboration-engine', version:'3.0.0'
     implementation('org.springframework.boot:spring-boot-starter-validation')
     compileOnly('org.projectlombok:lombok')
     developmentOnly('org.springframework.boot:spring-boot-devtools')
     annotationProcessor('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    implementation ('org.springframework.boot:spring-boot-starter-actuator')
 }
 
 dependencyManagement {
     imports {
-        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+        mavenBom "com.vaadin:vaadin-bom:$vaadinVersion"
     }
 }
 
 test {
     useJUnitPlatform()
+}
+
+vaadin {
+    pnpmEnable = false
 }

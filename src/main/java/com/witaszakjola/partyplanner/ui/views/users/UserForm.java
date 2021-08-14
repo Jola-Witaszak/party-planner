@@ -25,7 +25,6 @@ public class UserForm extends FormLayout {
     private final UserService userService;
     private UserDto userDto;
 
-  //  TextField id = new TextField("User id");
     TextField username = new TextField("Name");
     EmailField email = new EmailField("Email");
     TextField phone = new TextField("Phone");
@@ -38,13 +37,10 @@ public class UserForm extends FormLayout {
 
     Binder<UserDto> binder = new Binder<>(UserDto.class);
 
-
     public UserForm(UserService userService) {
         this.userService = userService;
 
         addClassName("user-form");
-
-       // id.setClearButtonVisible(true);
 
         username.setAutofocus(true);
         username.setClearButtonVisible(true);
@@ -62,7 +58,6 @@ public class UserForm extends FormLayout {
         initBinder();
 
         add(
-             //   id,
                 username,
                 email,
                 phone,

@@ -1,6 +1,5 @@
 package com.witaszakjola.partyplanner.ui.views.map;
 
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -12,7 +11,7 @@ import com.witaszakjola.partyplanner.ui.MainLayout;
 @Route(value = "map", layout = MainLayout.class)
 public class MapView extends VerticalLayout {
 
-    private MapService mapService;
+    private final MapService mapService;
 
     Label inProgress = new Label("in progress...");
 
@@ -21,11 +20,6 @@ public class MapView extends VerticalLayout {
         this.mapService = mapService;
         addClassName("map-view");
         setSizeFull();
-        Div div = new Div();
-        div.setSizeFull();
-        div.addClassName("map");
-
-        download();
 
         inProgress.setSizeFull();
         inProgress.setVisible(true);
@@ -33,6 +27,6 @@ public class MapView extends VerticalLayout {
     }
 
     private void download() {
-      //  return new Div(mapService.downloadMap());
+        mapService.downloadMap();
     }
 }

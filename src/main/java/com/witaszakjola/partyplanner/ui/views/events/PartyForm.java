@@ -15,7 +15,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.shared.Registration;
 import com.witaszakjola.partyplanner.backend.domain.EventDto;
@@ -28,7 +27,6 @@ public class PartyForm extends FormLayout{
         private final PartyService partyService;
         private EventDto eventDto;
 
-        TextField id = new TextField("Party id");
         TextField name = new TextField("Name");
         DatePicker startDate = new DatePicker("Start date");
         TimePicker startTime = new TimePicker("Start time");
@@ -49,8 +47,6 @@ public class PartyForm extends FormLayout{
 
             addClassName("party-form");
 
-            id.setClearButtonVisible(true);
-            id.setMaxLength(25);
             name.setClearButtonVisible(true);
             name.setValueChangeMode(ValueChangeMode.EAGER);
             name.setAutofocus(true);
@@ -62,7 +58,6 @@ public class PartyForm extends FormLayout{
             initBinder();
 
             add(
-                    id,
                     name,
                     startDate,
                     startTime,
@@ -72,11 +67,6 @@ public class PartyForm extends FormLayout{
         }
 
         private void initBinder() {
-            // partyId
-            binder.forField(id)
-                    .withNullRepresentation("")
-                    .withConverter(new StringToLongConverter("Insert correct id"))
-                    .bind(EventDto::getId, EventDto::setId);
 
             // name
             binder.forField(name)
