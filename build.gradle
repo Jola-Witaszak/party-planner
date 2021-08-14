@@ -1,22 +1,22 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'org.springframework.boot' version '2.4.5'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
-    id 'com.vaadin' version '0.14.5.1'
+    id 'com.vaadin' version '20.0.6'
 }
 
 defaultTasks("clean", "build", "prepare")
 
 group = 'com.witaszakjola'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
 }
 
 ext {
-    set('vaadinVersion', "14.5.1")
+    set('vaadinVersion', "20.0.6")
 }
 
 configurations {
@@ -34,6 +34,7 @@ dependencies {
     developmentOnly('org.springframework.boot:spring-boot-devtools')
     annotationProcessor('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    implementation ('org.springframework.boot:spring-boot-starter-actuator')
 }
 
 dependencyManagement {

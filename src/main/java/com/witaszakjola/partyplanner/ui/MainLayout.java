@@ -11,8 +11,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 import com.witaszakjola.partyplanner.ui.views.events.PartyView;
 import com.witaszakjola.partyplanner.ui.views.links.LinkView;
 import com.witaszakjola.partyplanner.ui.views.map.MapView;
@@ -20,7 +18,6 @@ import com.witaszakjola.partyplanner.ui.views.planner.PlannerView;
 import com.witaszakjola.partyplanner.ui.views.users.ListView;
 
 @CssImport("./styles/shared-styles.css")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainLayout extends AppLayout {
 
     public MainLayout() {
