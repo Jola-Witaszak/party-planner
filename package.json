@@ -23,7 +23,7 @@
     "@vaadin/vaadin-avatar": "20.0.2",
     "@vaadin/vaadin-board": "20.0.2",
     "@vaadin/vaadin-button": "20.0.2",
-    "@vaadin/vaadin-charts": "20.0.2",
+    "@vaadin/vaadin-charts": "22.0.0",
     "@vaadin/vaadin-checkbox": "20.0.2",
     "@vaadin/vaadin-combo-box": "20.0.2",
     "@vaadin/vaadin-confirm-dialog": "20.0.2",
